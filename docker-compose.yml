@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  # web:
+  #   build: .
+  #   tty: true
+  #   stdin_open: true
+  #   command: make start-dev
+  #   volumes:
+  #     - "./:/app:cached"
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - db
+  #     - db_admin
+  #     - redis
+  db:
+    image: mysql:5.6
+    ports:
+      - "49245:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: minhori_local
+      MYSQL_USER: minhori
+      MYSQL_PASSWORD: minhori
+  redis:
+    image: redis:3
+    command: redis-server --save "" --appendonly no
+    ports:
+      - "25702:6379"
