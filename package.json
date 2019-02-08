@@ -14,7 +14,6 @@
         "axios": "^0.18",
         "cross-env": "^5.1",
         "laravel-mix": "^4.0.7",
-        "popper.js": "^1.12",
         "prettier": "^1.16.4",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
