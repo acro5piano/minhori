@@ -1,5 +1,9 @@
+require('dotenv').config()
+
 import * as path from 'path'
 import * as express from 'express'
+import * as bodyParser from 'body-parser'
+import { loggerMiddleware } from '@api/middleware/logger'
 import { PostList } from '@frontend/components/PostList'
 import { Post } from '@frontend/components/Post'
 import { withHelmet } from './ssr'
@@ -19,6 +23,10 @@ const posts = [
     content: 'barbarbar',
   },
 ]
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.use(loggerMiddleware)
 
 app.get('/posts', (_req, res) => {
   res.send(withHelmet(PostList, { posts }))

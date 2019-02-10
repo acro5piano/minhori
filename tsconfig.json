@@ -38,6 +38,7 @@
     "baseUrl": "./",
     "outDir": "dist",
     "paths": {
+      "@root/*": ["./*"],
       "@frontend/*": ["./frontend/*"],
       "@api/*": ["./api/*"]
     }
