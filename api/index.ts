@@ -16,8 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(loggerMiddleware)
 
-app.use('/', web)
+app.get('/health', (_req, res) => {
+  res.send('ok')
+})
 app.use('/api/v1', api)
+app.use('/', web)
 
 app.listen(20589, () => {
   console.log('listening')
