@@ -29,7 +29,7 @@ const template = ({ title, styles, body, meta }: Template) => `
 </html>
 `
 
-export const withHelmet = (App: any, props: any) => {
+export function withHelmet<T extends {}>(App: React.ComponentType<T>, props: T) {
   const sheet = new ServerStyleSheet()
   const body = renderToString(sheet.collectStyles(<App {...props} />))
   const styles = sheet.getStyleTags()

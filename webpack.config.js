@@ -50,9 +50,7 @@ const webpackConfig = {
     ],
   },
   plugins: [
-    new WebpackAssetsManifest({
-      // Options go here
-    }),
+    new WebpackAssetsManifest(),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: 'index.html',

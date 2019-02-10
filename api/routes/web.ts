@@ -5,7 +5,7 @@ import { withHelmet } from '@api/ssr'
 
 export const router = Router()
 
-const posts = [
+const questions = [
   {
     title: 'foo',
     content: 'foofoofoo',
@@ -17,9 +17,9 @@ const posts = [
 ]
 
 router.get('/questions', (_req, res) => {
-  res.send(withHelmet(QuestionList, { posts }))
+  res.send(withHelmet(QuestionList, { questions }))
 })
 
 router.get('/questions/1', (_req, res) => {
-  res.send(withHelmet(Post, { post: posts[0] }))
+  res.send(withHelmet(Post, { post: questions[0] }))
 })
