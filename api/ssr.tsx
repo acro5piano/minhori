@@ -4,6 +4,10 @@ import { ServerStyleSheet } from 'styled-components'
 import { Helmet } from 'react-helmet'
 import { CommonHelmet } from '@frontend/Helmet'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { SheetsRegistry } from 'jss'
+import JssProvider from 'react-jss/lib/JssProvider'
+import { muiTheme } from '@frontend/theme'
+import { MuiThemeProvider, createGenerateClassName } from '@material-ui/core/styles'
 const assetFiles = require('../build/manifest.json')
 
 const getStatic = (a: any) => /\/static.+\.js$/.test(a)
@@ -14,9 +18,10 @@ interface Template {
   styles: string
   body: string
   meta: string
+  muiCss: string
 }
 
-const template = ({ title, styles, body, meta }: Template) => `
+const template = ({ title, styles, body, meta, muiCss }: Template) => `
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -24,6 +29,7 @@ const template = ({ title, styles, body, meta }: Template) => `
     ${title}
     ${styles}
     ${meta}
+    <style id="jss-server-side">${muiCss}</style>
   </head>
   <body style="margin:0">
     <div id="root">${body}</div>
@@ -33,19 +39,27 @@ const template = ({ title, styles, body, meta }: Template) => `
 `
 
 export function withHelmet<T extends {}>(App: React.ComponentType<T>, props: T) {
+  const sheetsRegistry = new SheetsRegistry()
+  const sheetsManager = new Map()
+  const generateClassName = createGenerateClassName()
   const sheet = new ServerStyleSheet()
   const body = renderToString(
     sheet.collectStyles(
-      <>
-        <CssBaseline />
-        <CommonHelmet />
-        <App {...props} />
-      </>,
+      <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
+        <MuiThemeProvider theme={muiTheme} sheetsManager={sheetsManager}>
+          <>
+            <CssBaseline />
+            <CommonHelmet />
+            <App {...props} />
+          </>
+        </MuiThemeProvider>
+      </JssProvider>,
     ),
   )
   const helmet = Helmet.renderStatic()
   const title = helmet.title.toString()
   const meta = helmet.meta.toString()
   const styles = sheet.getStyleTags() + helmet.style.toString()
-  return template({ title, styles, body, meta })
+  const muiCss = sheetsRegistry.toString()
+  return template({ title, styles, body, meta, muiCss })
 }

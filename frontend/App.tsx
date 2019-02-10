@@ -2,14 +2,18 @@ import * as React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { Routes } from '@frontend/Routes'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import theme from '@frontend/theme'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import { muiTheme } from '@frontend/theme'
 import { CommonHelmet } from '@frontend/Helmet'
 
-const muiTheme = createMuiTheme(theme)
-
 export class App extends React.Component<{}> {
-  componentDidMount() {}
+  componentDidMount() {
+    const jssStyles = document.getElementById('jss-server-side')
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles)
+    }
+  }
+
   render() {
     return (
       <React.Fragment>

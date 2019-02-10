@@ -1,3 +1,5 @@
+import { createMuiTheme } from '@material-ui/core/styles'
+
 export const theme = {
   typography: {
     useNextVariants: true,
@@ -34,4 +36,4 @@ export const theme = {
   },
 }
 
-export default theme
+export const muiTheme = createMuiTheme(theme)
