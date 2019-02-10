@@ -4,6 +4,7 @@ import { Routes } from '@frontend/Routes'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import theme from '@frontend/theme'
+import { CommonHelmet } from '@frontend/Helmet'
 
 const muiTheme = createMuiTheme(theme)
 
@@ -13,6 +14,7 @@ export class App extends React.Component<{}> {
     return (
       <React.Fragment>
         <CssBaseline />
+        <CommonHelmet />
         <MuiThemeProvider theme={muiTheme}>
           <BrowserRouter>
             <Routes />
