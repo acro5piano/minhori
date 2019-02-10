@@ -32,14 +32,14 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
 
     /* Module Resolution Options */
     "baseUrl": "./",
     "outDir": "dist",
     "paths": {
-      "@frontend": ["./frontend/*"],
-      "@api": ["./api/*"]
+      "@frontend/*": ["./frontend/*"],
+      "@api/*": ["./api/*"]
     }
   }
 }

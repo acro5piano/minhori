@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const WebpackAssetsManifest = require('webpack-assets-manifest')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -48,6 +49,9 @@ const webpackConfig = {
     ],
   },
   plugins: [
+    new WebpackAssetsManifest({
+      // Options go here
+    }),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: 'index.html',
