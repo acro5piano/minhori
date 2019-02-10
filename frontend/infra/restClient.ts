@@ -94,9 +94,6 @@ export class RestClient {
   }
 
   buildUrl(url: string): string {
-    console.log(this.prefix)
-    console.log(url)
-    console.log(process.env.API_URL)
     return process.env.API_URL + this.prefix + url
   }
 }
