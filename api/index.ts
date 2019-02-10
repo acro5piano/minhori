@@ -10,7 +10,6 @@ import { router as web } from '@api/routes/web'
 const app = express()
 
 app.use(require('cors')())
-app.use(express.static(path.join(__dirname, '../build')))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -21,6 +20,8 @@ app.get('/health', (_req, res) => {
 })
 app.use('/api/v1', api)
 app.use('/', web)
+
+app.use(express.static(path.join(__dirname, '../build')))
 
 app.listen(20589, () => {
   console.log('listening')
