@@ -1,5 +1,6 @@
 import { restClient as client } from '@frontend/infra/restClient'
 
 export const QuestionApi = {
-  get: () => client.GET('/posts/1'),
+  list: () => client.GET('/questions'),
+  get: () => client.GET('/questions/1'),
 }

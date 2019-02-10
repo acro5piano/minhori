@@ -18,7 +18,8 @@ const webpackConfig = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
     alias: {
-      frontend: path.resolve(__dirname, './frontend/'),
+      '@api': path.resolve(__dirname, './api/'),
+      '@frontend': path.resolve(__dirname, './frontend/'),
     },
   },
   devServer: {
@@ -57,7 +58,7 @@ const webpackConfig = {
       template: 'index.html',
     }),
     new ForkTsCheckerWebpackPlugin(),
-    new Dotenv({ path: `./.env.${process.env.NODE_ENV || 'development'}` }),
+    new Dotenv(),
   ],
 }
 

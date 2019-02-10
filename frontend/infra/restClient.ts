@@ -15,7 +15,7 @@ interface RequestParameter {
 const httpAuthorizationErrorMessages = ['token_invalid', 'unauthorized']
 
 export class RestClient {
-  prefix: string = '/api/v2'
+  prefix: string = '/api/v1'
   onHttpAuthorizationError?: () => void
 
   GET(url: string, params: Object = {}, headers: Object = {}) {
@@ -94,8 +94,10 @@ export class RestClient {
   }
 
   buildUrl(url: string): string {
-    // return baseUrl + this.prefix + url
-    return '/' + this.prefix + url
+    console.log(this.prefix)
+    console.log(url)
+    console.log(process.env.API_URL)
+    return process.env.API_URL + this.prefix + url
   }
 }
 

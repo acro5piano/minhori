@@ -12,12 +12,12 @@ const Title = styled.div`
   color: #333;
 `
 
-export const PostList = ({ posts }: { posts: IPost[] }) => (
+export const QuestionList = ({ questions }: { questions: IPost[] }) => (
   <div>
     <Helmet>
       <title>Welcome to post list</title>
     </Helmet>
-    {posts.map(post => (
+    {questions.map(post => (
       <Container key={post.title}>
         <Title>{post.title}</Title>
       </Container>
