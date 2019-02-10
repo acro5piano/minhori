@@ -43,9 +43,9 @@ export function withHelmet<T extends {}>(App: React.ComponentType<T>, props: T) 
       </>,
     ),
   )
-  const styles = sheet.getStyleTags()
   const helmet = Helmet.renderStatic()
   const title = helmet.title.toString()
   const meta = helmet.meta.toString()
+  const styles = sheet.getStyleTags() + helmet.style.toString()
   return template({ title, styles, body, meta })
 }
