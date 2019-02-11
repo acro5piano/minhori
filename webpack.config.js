@@ -20,6 +20,7 @@ const webpackConfig = {
     alias: {
       '@api': path.resolve(__dirname, './api/'),
       '@frontend': path.resolve(__dirname, './frontend/'),
+      '@shared': path.resolve(__dirname, './shared/'),
     },
   },
   devServer: {

@@ -33,12 +33,14 @@
     "emitDecoratorMetadata": true,
 
     "allowSyntheticDefaultImports": false,
+    "resolveJsonModule": true,
 
     /* Module Resolution Options */
     "baseUrl": "./",
     "outDir": "dist",
     "paths": {
       "@root/*": ["./*"],
+      "@shared/*": ["./shared/*"],
       "@frontend/*": ["./frontend/*"],
       "@api/*": ["./api/*"]
     }

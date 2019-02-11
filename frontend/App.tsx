@@ -6,6 +6,9 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import { muiTheme } from '@frontend/theme'
 import { CommonHelmet } from '@frontend/Helmet'
 
+import '@frontend/services/firebase'
+import 'firebase/auth'
+
 export class App extends React.Component<{}> {
   componentDidMount() {
     const jssStyles = document.getElementById('jss-server-side')

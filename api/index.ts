@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+// import '@shared/firebase'
+import '@api/services/firebase'
 import * as path from 'path'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
