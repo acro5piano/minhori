@@ -25,9 +25,15 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
+          name: setup
+          command: |
+            cp .env.local .env
+            cp firebase-adminsdk.example.json firebase-adminsdk.json
+      - run:
           name: check ts
           command: |
             yarn tsc
+            # TODO: Run test in CI
             # yarn test
 
 workflows:
