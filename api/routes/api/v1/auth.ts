@@ -22,3 +22,5 @@ router.post('/register', async (req, res) => {
   })
   res.send(user)
 })
+
+// router.put('/me' bbind

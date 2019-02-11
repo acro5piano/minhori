@@ -5,6 +5,12 @@ export const QuestionApi = {
   get: () => client.GET('/questions/1'),
 }
 
+interface RegisterParams {
+  name: string
+  avatar_url?: string
+}
+
 export const AuthApi = {
   me: () => client.GET('/auth/me'),
+  register: (params: RegisterParams) => client.POST('/auth/register', params),
 }
