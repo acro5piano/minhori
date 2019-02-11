@@ -3,8 +3,8 @@ import { ModelBase } from '@api/models/ModelBase'
 
 export class User extends ModelBase {
   name!: string
-  email!: string
   avatar_url?: string
+  firebase_uid!: string
 
   static tableName = 'users'
 

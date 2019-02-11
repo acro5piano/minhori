@@ -4,6 +4,7 @@ import { User } from '@api/models/User'
 
 export async function authMiddleware(req: Request, res: Response, next: NextFunction) {
   const { authorization } = req.headers
+
   if (authorization) {
     const user = await admin.auth().verifyIdToken(authorization)
     req.params.user = user
