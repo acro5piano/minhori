@@ -6,3 +6,5 @@ userObservable.subscribe(user => {
   console.log('user login')
   console.log(user)
 })
+
+export type IUser = User
