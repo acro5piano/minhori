@@ -1,23 +1,8 @@
 import { Router } from 'express'
-import { authMiddleware } from '@api/middleware/auth'
+import { router as authRouter } from '@api/routes/api/v1/auth'
+import { router as questionRouter } from '@api/routes/api/v1/questions'
 
 export const router = Router()
 
-const posts = [
-  {
-    title: 'foo',
-    content: 'foofoofoo',
-  },
-  {
-    title: 'bar',
-    content: 'barbarbar',
-  },
-]
-
-router.get('/questions', (_req, res) => {
-  res.send(posts)
-})
-
-router.get('/auth/me', authMiddleware, async (req, res) => {
-  res.send(req.params.user)
-})
+router.use('/auth', authRouter)
+router.use('/questions', questionRouter)
