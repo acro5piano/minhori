@@ -5,7 +5,6 @@ exports.up = async function(knex, Promise) {
       .notNullable()
       .primary()
     table.string('name').notNullable()
-    table.timestamps()
   })
 
   await knex.schema.createTable('questions_tags', function(table) {
@@ -13,7 +12,6 @@ exports.up = async function(knex, Promise) {
     table.foreign('question_id').references('questions.id')
     table.uuid('tag_id').notNullable()
     table.foreign('tag_id').references('tags.id')
-    table.timestamps()
   })
 }
 
