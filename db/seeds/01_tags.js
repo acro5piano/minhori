@@ -1,6 +1,6 @@
 exports.seed = async function(knex, Promise) {
   await knex('tags').del()
-  await knex('tags').insert(tags.map(addTimestamps).map(setUUID))
+  await knex('tags').insert(tags.map(setUUID))
 }
 
 const tags = [
@@ -29,13 +29,5 @@ function setUUID(obj) {
   return {
     ...obj,
     id: '00000000-0000-0000-0000-00000000' + obj.id,
-  }
-}
-
-function addTimestamps(obj) {
-  return {
-    ...obj,
-    created_at: new Date(),
-    updated_at: new Date(),
   }
 }
