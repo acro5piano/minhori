@@ -7,6 +7,7 @@ const token = 'FAKE_FIREBASE_UID'
 async function migrate() {
   await (global as any).knex.migrate.rollback()
   await (global as any).knex.migrate.latest()
+  await (global as any).knex.seed.run()
 }
 
 describe('auth', () => {
@@ -30,6 +31,24 @@ describe('auth', () => {
 })
 
 describe('question', () => {
+  it('reject to create question', async () => {
+    await request(app)
+      .post('/api/v1/questions')
+      .send({
+        title: 'title',
+        content: 'content',
+      })
+      .expect(401)
+    await request(app)
+      .post('/api/v1/questions')
+      .set('Authorization', token)
+      .send({
+        title: 'title',
+        content: 'content',
+      })
+      .expect(422)
+  })
+
   it('create question', async () => {
     let res = await request(app)
       .post('/api/v1/questions')
@@ -37,6 +56,7 @@ describe('question', () => {
       .send({
         title: 'title',
         content: 'content',
+        tags: [{ id: '00000000-0000-0000-0000-000000000001' }],
       })
       .expect(200)
     expect(res.body.title).toEqual('title')
@@ -45,6 +65,7 @@ describe('question', () => {
       .get('/api/v1/questions')
       .expect(200)
 
-    expect(res.body.length).toBeGreaterThanOrEqual(1)
+    console.log(res.body)
+    expect(res.body.length).toBe(1)
   })
 })
