@@ -7,6 +7,7 @@ export const router = Router()
 router.get('/', async (_req, res) => {
   const questions = await Question.query()
     .eager('tags')
+    .orderBy('created_at', 'DESC')
     .limit(10)
   res.send(questions)
 })

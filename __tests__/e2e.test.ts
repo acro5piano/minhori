@@ -65,7 +65,12 @@ describe('question', () => {
       .get('/api/v1/questions')
       .expect(200)
 
-    console.log(res.body)
-    expect(res.body.length).toBe(1)
+    expect(res.body.length).toBeGreaterThanOrEqual(1)
+    expect(res.body[0].title).toEqual('title')
+    expect(res.body[0].tags).toHaveLength(1)
+    expect(res.body[0].tags[0]).toMatchObject({
+      id: '00000000-0000-0000-0000-000000000001',
+      name: 'オーストラリア',
+    })
   })
 })
