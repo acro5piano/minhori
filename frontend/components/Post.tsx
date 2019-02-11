@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Helmet } from 'react-helmet'
-import { Post as IPost } from '@frontend/entities/Post'
+import { Question as IPost } from '@frontend/entities/Question'
 
 const Container = styled.div`
   background: orange;

@@ -1,6 +1,7 @@
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import { StorageKey, storage } from '@frontend/infra/storage'
+import { userObservable } from '@frontend/store'
 
 const config = {
   apiKey: process.env.FIREBASE_APIKEY,
@@ -17,6 +18,10 @@ firebase.auth().onAuthStateChanged(async user => {
   if (user) {
     const token = await user.getIdToken()
     storage.set(StorageKey.AUTH_TOKEN, token)
+    userObservable.next({
+      id: user.uid,
+      name: user.displayName || '',
+    })
   } else {
     console.log('sign out')
   }
