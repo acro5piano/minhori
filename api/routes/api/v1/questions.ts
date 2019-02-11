@@ -4,19 +4,9 @@ import { authMiddleware } from '@api/middleware/auth'
 
 export const router = Router()
 
-const posts = [
-  {
-    title: 'foo',
-    content: 'foofoofoo',
-  },
-  {
-    title: 'bar',
-    content: 'barbarbar',
-  },
-]
-
-router.get('/', (_req, res) => {
-  res.send(posts)
+router.get('/', async (_req, res) => {
+  const questions = await Question.query().limit(10)
+  res.send(questions)
 })
 
 router.post('/', authMiddleware, async (req, res) => {
