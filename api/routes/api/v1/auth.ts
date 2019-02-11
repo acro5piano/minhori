@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { authMiddleware } from '@api/middleware/auth'
-import * as admin from 'firebase-admin'
+import { verify } from '@api/services/firebase'
 import { User } from '@api/models/User'
 
 export const router = Router()
@@ -15,9 +15,9 @@ router.post('/register', async (req, res) => {
     res.status(401).send('unauthorized')
     return
   }
-  const { uid } = await admin.auth().verifyIdToken(authorization)
+  const { uid } = await verify(authorization)
   const user = await User.query().insert({
-    name: req.params.name,
+    name: req.body.name,
     firebase_uid: uid,
   })
   res.send(user)
