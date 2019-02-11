@@ -5,6 +5,7 @@ import { Model } from 'objection'
 const token = 'FAKE_FIREBASE_UID'
 
 describe('auth', () => {
+  beforeAll((global as any).migrate)
   afterAll(Model.knex().destroy)
 
   it('registers user', async () => {
