@@ -1,4 +1,6 @@
 import * as firebase from 'firebase/app'
+import 'firebase/auth'
+import { StorageKey, storage } from '@frontend/infra/storage'
 
 const config = {
   apiKey: process.env.FIREBASE_APIKEY,
@@ -10,3 +12,12 @@ const config = {
 }
 
 firebase.initializeApp(config)
+
+firebase.auth().onAuthStateChanged(async user => {
+  if (user) {
+    const token = await user.getIdToken()
+    storage.set(StorageKey.AUTH_TOKEN, token)
+  } else {
+    console.log('sign out')
+  }
+})

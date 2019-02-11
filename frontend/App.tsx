@@ -7,14 +7,17 @@ import { muiTheme } from '@frontend/theme'
 import { CommonHelmet } from '@frontend/Helmet'
 
 import '@frontend/services/firebase'
-import 'firebase/auth'
+
+function removeServerJss() {
+  const jssStyles = document.getElementById('jss-server-side')
+  if (jssStyles && jssStyles.parentNode) {
+    jssStyles.parentNode.removeChild(jssStyles)
+  }
+}
 
 export class App extends React.Component<{}> {
   componentDidMount() {
-    const jssStyles = document.getElementById('jss-server-side')
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles)
-    }
+    removeServerJss()
   }
 
   render() {

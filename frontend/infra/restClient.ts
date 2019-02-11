@@ -49,7 +49,7 @@ export class RestClient {
 
     try {
       const token = await storage.get(StorageKey.AUTH_TOKEN)
-      headers.Authorization = `Bearer ${token}`
+      headers.Authorization = token
     } catch (err) {
       headers.Authorization = ''
     }

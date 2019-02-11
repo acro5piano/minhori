@@ -21,7 +21,7 @@ export class Storage {
     this.driver = driver
   }
 
-  set(key: Key, object: object) {
+  set(key: Key, object: any) {
     return this.driver.setItem(key, JSON.stringify(object))
   }
 
