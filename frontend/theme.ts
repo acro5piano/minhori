@@ -7,7 +7,7 @@ export const theme = {
   palette: {
     type: 'light' as 'light',
     primary: {
-      main: '#4098b4',
+      main: '#00a4d3',
       contrastText: '#fff',
     },
     secondary: {
