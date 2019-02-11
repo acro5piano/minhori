@@ -5,16 +5,28 @@ export class Question extends ModelBase {
   title!: string
   content!: string
 
-  static tableName = 'users'
+  static tableName = 'questions'
 
   static get relationMappings() {
     return {
-      containers: {
+      user: {
         relation: Model.BelongsToOneRelation,
         modelClass: __dirname + '/User',
         join: {
           from: 'users.id',
           to: 'questions.user_id',
+        },
+      },
+      tags: {
+        relation: Model.ManyToManyRelation,
+        modelClass: __dirname + '/Tag',
+        join: {
+          from: 'questions.id',
+          through: {
+            from: 'questions_tags.question_id',
+            to: 'questions_tags.tag_id',
+          },
+          to: 'tags.id',
         },
       },
     }
