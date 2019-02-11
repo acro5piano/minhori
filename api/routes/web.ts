@@ -12,10 +12,12 @@ router.get('/', (_req, res) => {
 
 const questions = [
   {
+    id: 'foo',
     title: 'foo',
     content: 'foofoofoo',
   },
   {
+    id: 'bar',
     title: 'bar',
     content: 'barbarbar',
   },
