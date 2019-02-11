@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import { StorageKey, storage } from '@frontend/infra/storage'
 import { userObservable } from '@frontend/store'
+import { AuthApi } from '@frontend/services/api'
 
 const config = {
   apiKey: process.env.FIREBASE_APIKEY,
@@ -22,27 +23,27 @@ firebase.auth().onAuthStateChanged(async user => {
       id: user.uid,
       name: user.displayName || '',
     })
+    console.log(user)
   } else {
     console.log('sign out')
   }
 })
 
-export function emailLogin(email: string, password: string) {
-  firebase.auth().createUserWithEmailAndPassword(email, password)
+export async function emailLogin(email: string, password: string) {
+  await firebase.auth().createUserWithEmailAndPassword(email, password)
 }
 
-export function facebookLogin() {
+export async function facebookLogin() {
   const provider = new firebase.auth.FacebookAuthProvider()
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(function(result) {
-      if (!result || !result.credential) {
-        return
-      }
-      const token = result.credential
-      const user = result.user
-      console.log(user)
-      console.log(token)
-    })
+  const result = await firebase.auth().signInWithPopup(provider)
+  if (!result || !result.credential || !result.user) {
+    return
+  }
+  const user = result.user
+  console.log(user)
+
+  await AuthApi.register({
+    name: user.displayName || '',
+    avatar_url: `${user.photoURL}?type=large` || '',
+  })
 }
