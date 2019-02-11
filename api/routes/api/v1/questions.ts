@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { Question } from '@api/models/Question'
+import { Answer } from '@api/models/Answer'
 import { authMiddleware } from '@api/middleware/auth'
 
 export const router = Router()
@@ -10,6 +11,13 @@ router.get('/', async (_req, res) => {
     .orderBy('created_at', 'DESC')
     .limit(10)
   res.send(questions)
+})
+
+router.get('/:id', async (req, res) => {
+  const question = await Question.query()
+    .findById(req.params.id)
+    .eager('[tags, answers]')
+  res.send(question)
 })
 
 router.post('/', authMiddleware, async (req, res) => {
@@ -26,4 +34,13 @@ router.post('/', authMiddleware, async (req, res) => {
     })),
   })
   res.send(question)
+})
+
+router.post('/:id/answers', authMiddleware, async (req, res) => {
+  const answer = await Answer.query().insert({
+    ...req.body,
+    question_id: req.params.id,
+    user_id: req.params.user.id,
+  })
+  res.send(answer)
 })
