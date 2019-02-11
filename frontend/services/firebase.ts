@@ -21,3 +21,23 @@ firebase.auth().onAuthStateChanged(async user => {
     console.log('sign out')
   }
 })
+
+export function emailLogin(email: string, password: string) {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+}
+
+export function facebookLogin() {
+  const provider = new firebase.auth.FacebookAuthProvider()
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
+      if (!result || !result.credential) {
+        return
+      }
+      const token = result.credential
+      const user = result.user
+      console.log(user)
+      console.log(token)
+    })
+}
