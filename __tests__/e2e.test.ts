@@ -1,13 +1,19 @@
 import * as request from 'supertest'
 import { app } from '@api/app'
 import { Model } from 'objection'
+import { Question } from '@api/models/Question'
 
 const token = 'FAKE_FIREBASE_UID'
 
 async function migrate() {
-  await (global as any).knex.migrate.rollback()
-  await (global as any).knex.migrate.latest()
-  await (global as any).knex.seed.run()
+  const knex = (global as any).knex
+  await knex.migrate.rollback()
+  await knex.migrate.latest()
+  await knex.seed.run()
+  await knex('questions_tags').del()
+  await knex('answers').del()
+  await knex('questions').del()
+  await knex('users').del()
 }
 
 describe('auth', () => {
@@ -72,5 +78,26 @@ describe('question', () => {
       id: '00000000-0000-0000-0000-000000000001',
       name: 'オーストラリア',
     })
+  })
+
+  it('create answer', async () => {
+    const question = await Question.query().first()
+    if (!question) {
+      throw Error
+    }
+    let res = await request(app)
+      .post(`/api/v1/questions/${question.id}/answers`)
+      .set('Authorization', token)
+      .send({
+        title: 'title',
+        content: 'content',
+      })
+      .expect(200)
+    expect(res.body.title).toEqual('title')
+
+    res = await request(app)
+      .get(`/api/v1/questions/${question.id}`)
+      .expect(200)
+    expect(res.body.answers).toHaveLength(1)
   })
 })

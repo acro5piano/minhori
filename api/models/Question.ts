@@ -29,6 +29,14 @@ export class Question extends ModelBase {
           to: 'tags.id',
         },
       },
+      answers: {
+        relation: Model.HasManyRelation,
+        modelClass: __dirname + '/Answer',
+        join: {
+          from: 'questions.id',
+          to: 'answers.question_id',
+        },
+      },
     }
   }
 }
