@@ -5,7 +5,7 @@ export class Question extends ModelBase {
   title!: string
   content!: string
 
-  static tableName = 'users'
+  static tableName = 'questions'
 
   static get relationMappings() {
     return {
