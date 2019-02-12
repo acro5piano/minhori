@@ -6,6 +6,7 @@ import { LOGIN_PATH, TOP_PATH, SIGNUP_PATH } from '@frontend/Routes'
 import { withUser, WithUser } from '@frontend/store'
 import { User } from '@frontend/entities/User'
 import { signOut } from '@frontend/services/firebase'
+import { asset } from '@shared/asset'
 
 const Container = styled.div`
   justify-content: space-between;
@@ -40,7 +41,7 @@ type Props = WithUser & RouteComponentProps
 export const _Header = ({ user, history }: Props) => (
   <Container>
     <LogoWrapper onClick={() => history.push(TOP_PATH)}>
-      <img src="/logo.png" width={120} />
+      <img src={asset('/logo.png')} width={120} />
     </LogoWrapper>
     {user ? (
       <Flex>
