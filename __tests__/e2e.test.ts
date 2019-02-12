@@ -2,6 +2,7 @@ import * as request from 'supertest'
 import { app } from '@api/app'
 import { Model } from 'objection'
 import { Question } from '@api/models/Question'
+import { User } from '@api/models/User'
 
 const token = 'FAKE_FIREBASE_UID'
 
@@ -33,6 +34,16 @@ describe('auth', () => {
       .expect(200)
 
     expect(res.body.name).toEqual('Kazuya')
+  })
+
+  it('does not duplicate user', async () => {
+    await request(app)
+      .post('/api/v1/auth/register')
+      .set('Authorization', token)
+      .send({ name: 'Kazuya' })
+      .expect(200)
+
+    expect(await User.query()).toHaveLength(1)
   })
 })
 

@@ -21,4 +21,5 @@ app.get('/health', (_req, res) => {
 })
 app.use('/api/v1', ApiV1)
 app.use(express.static(path.join(__dirname, '../build')))
+app.use(express.static(path.join(__dirname, '../static')))
 app.use('/', web)
