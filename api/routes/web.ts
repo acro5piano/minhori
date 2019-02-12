@@ -30,3 +30,7 @@ router.get('/questions', (_req, res) => {
 router.get('/questions/1', (_req, res) => {
   res.send(withHelmet(Post, { post: questions[0] }))
 })
+
+router.get('/*', (_req, res) => {
+  res.send(withHelmet(Top, { questions }))
+})

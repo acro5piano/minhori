@@ -8,9 +8,10 @@ import { SheetsRegistry } from 'jss'
 import JssProvider from 'react-jss/lib/JssProvider'
 import { muiTheme } from '@frontend/theme'
 import { MuiThemeProvider, createGenerateClassName } from '@material-ui/core/styles'
+import { StaticRouter } from 'react-router-dom'
 const assetFiles = require('../build/manifest.json')
 
-const getStatic = (a: any) => /\/static.+\.js$/.test(a)
+const getStatic = (a: any) => /bundle.+\.js$/.test(a)
 const assets = Object.values(assetFiles).filter(getStatic)
 
 interface Template {
@@ -50,7 +51,10 @@ export function withHelmet<T extends {}>(App: React.ComponentType<T>, props: T) 
           <>
             <CssBaseline />
             <CommonHelmet />
-            <App {...props} />
+
+            <StaticRouter context={{}}>
+              <App {...props} />
+            </StaticRouter>
           </>
         </MuiThemeProvider>
       </JssProvider>,
