@@ -44,7 +44,6 @@ export async function loginWithFacebook() {
     return
   }
   const user = result.user
-  console.log(user)
 
   await AuthApi.register({
     name: user.displayName || '',

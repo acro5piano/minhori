@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { muiTheme } from '@frontend/theme'
 import { CommonHelmet } from '@frontend/Helmet'
+import { Header } from '@frontend/components/Header'
 
 import '@frontend/services/firebase'
 
@@ -27,7 +28,10 @@ export class App extends React.Component<{}> {
         <CommonHelmet />
         <MuiThemeProvider theme={muiTheme}>
           <BrowserRouter>
-            <Routes />
+            <>
+              <Header />
+              <Routes />
+            </>
           </BrowserRouter>
         </MuiThemeProvider>
       </React.Fragment>

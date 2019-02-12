@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField'
-import { Header } from '@frontend/components/Header'
 
 const Container = styled(Card as React.SFC)`
   && {
@@ -26,25 +25,31 @@ interface Props {
 interface State {
   email: string
   password: string
+  loading: boolean
 }
 
 export class SignUp extends React.Component<Props, State> {
   state = {
     email: '',
     password: '',
+    loading: false,
   }
 
   onSignUpWithEmail = () => {
-    this.props.onSignUpWithEmail(this.state.email, this.state.password)
+    this.setState({ loading: true })
+    try {
+      this.props.onSignUpWithEmail(this.state.email, this.state.password)
+    } finally {
+      this.setState({ loading: false })
+    }
   }
 
   async componentDidMount() {}
 
   render() {
-    const { email, password } = this.state
+    const { email, password, loading } = this.state
     return (
       <>
-        <Header />
         <Container>
           <TextField
             label="メールアドレス"
@@ -59,8 +64,13 @@ export class SignUp extends React.Component<Props, State> {
             fullWidth
           />
           <ButtonWrap>
-            <Button color="primary" variant="contained" onClick={this.onSignUpWithEmail}>
-              新規登録
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={this.onSignUpWithEmail}
+              disabled={false}
+            >
+              {loading ? '...' : '新規登録'}
             </Button>
           </ButtonWrap>
         </Container>

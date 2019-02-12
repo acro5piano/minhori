@@ -9,6 +9,7 @@ import JssProvider from 'react-jss/lib/JssProvider'
 import { muiTheme } from '@frontend/theme'
 import { MuiThemeProvider, createGenerateClassName } from '@material-ui/core/styles'
 import { StaticRouter } from 'react-router-dom'
+import { Header } from '@frontend/components/Header'
 const assetFiles = require('../build/manifest.json')
 
 const getStatic = (a: any) => /bundle.+\.js$/.test(a)
@@ -53,7 +54,10 @@ export function withHelmet<T extends {}>(App: React.ComponentType<T>, props: T) 
             <CommonHelmet />
 
             <StaticRouter context={{}}>
-              <App {...props} />
+              <>
+                <Header />
+                <App {...props} />
+              </>
             </StaticRouter>
           </>
         </MuiThemeProvider>
