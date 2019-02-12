@@ -20,6 +20,7 @@ const ButtonWrap = styled.div`
 
 interface Props {
   onSignUpWithEmail: (email: string, password: string) => void
+  onSignUpWithFacebook: () => void
 }
 
 interface State {
@@ -44,13 +45,12 @@ export class SignUp extends React.Component<Props, State> {
     }
   }
 
-  async componentDidMount() {}
-
   render() {
     const { email, password, loading } = this.state
     return (
       <>
         <Container>
+          <Button onClick={this.props.onSignUpWithFacebook}>Facebook で登録</Button>
           <TextField
             label="メールアドレス"
             value={email}
