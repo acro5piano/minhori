@@ -32,5 +32,5 @@ router.get('/questions/1', (_req, res) => {
 })
 
 router.get('/*', (_req, res) => {
-  res.send(withHelmet(Top, { questions }))
+  res.send(withHelmet(Top, {}))
 })
