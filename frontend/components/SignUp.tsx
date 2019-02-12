@@ -26,22 +26,26 @@ interface Props {
 interface State {
   email: string
   password: string
+  loading: boolean
 }
 
 export class SignUp extends React.Component<Props, State> {
   state = {
     email: '',
     password: '',
+    loading: false,
   }
 
   onSignUpWithEmail = () => {
+    this.setState({ loading: true })
     this.props.onSignUpWithEmail(this.state.email, this.state.password)
+    this.setState({ loading: false })
   }
 
   async componentDidMount() {}
 
   render() {
-    const { email, password } = this.state
+    const { email, password, loading } = this.state
     return (
       <>
         <Header />
@@ -60,7 +64,7 @@ export class SignUp extends React.Component<Props, State> {
           />
           <ButtonWrap>
             <Button color="primary" variant="contained" onClick={this.onSignUpWithEmail}>
-              新規登録
+              {loading ? '...' : '新規登録'}
             </Button>
           </ButtonWrap>
         </Container>

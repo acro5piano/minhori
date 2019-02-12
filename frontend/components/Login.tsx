@@ -26,22 +26,26 @@ interface Props {
 interface State {
   email: string
   password: string
+  loading: boolean
 }
 
 export class Login extends React.Component<Props, State> {
   state = {
     email: '',
     password: '',
+    loading: false,
   }
 
-  onLoginWithEmail = () => {
-    this.props.onLoginWithEmail(this.state.email, this.state.password)
+  onLoginWithEmail = async () => {
+    this.setState({ loading: true })
+    await this.props.onLoginWithEmail(this.state.email, this.state.password)
+    this.setState({ loading: false })
   }
 
   async componentDidMount() {}
 
   render() {
-    const { email, password } = this.state
+    const { email, password, loading } = this.state
     return (
       <>
         <Header />
@@ -60,7 +64,7 @@ export class Login extends React.Component<Props, State> {
           />
           <ButtonWrap>
             <Button color="primary" variant="contained" onClick={this.onLoginWithEmail}>
-              ログイン
+              {loading ? '...' : 'ログイン'}
             </Button>
           </ButtonWrap>
         </Container>
