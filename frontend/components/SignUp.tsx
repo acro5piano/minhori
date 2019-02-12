@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField'
-import { Header } from '@frontend/components/Header'
 
 const Container = styled(Card as React.SFC)`
   && {
@@ -51,7 +50,6 @@ export class SignUp extends React.Component<Props, State> {
     const { email, password, loading } = this.state
     return (
       <>
-        <Header />
         <Container>
           <TextField
             label="メールアドレス"

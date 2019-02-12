@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField'
-import { Header } from '@frontend/components/Header'
 
 const Container = styled(Card as React.SFC)`
   && {
@@ -21,6 +20,7 @@ const ButtonWrap = styled.div`
 
 interface Props {
   onLoginWithEmail: (email: string, password: string) => void
+  onLoginWithFacebook: () => void
 }
 
 interface State {
@@ -45,14 +45,12 @@ export class Login extends React.Component<Props, State> {
     }
   }
 
-  async componentDidMount() {}
-
   render() {
     const { email, password, loading } = this.state
     return (
       <>
-        <Header />
         <Container>
+          <Button onClick={this.props.onLoginWithFacebook}>Facebook でログイン</Button>
           <TextField
             label="メールアドレス"
             value={email}
