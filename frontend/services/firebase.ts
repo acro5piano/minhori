@@ -29,11 +29,15 @@ firebase.auth().onAuthStateChanged(async user => {
   }
 })
 
-export async function emailLogin(email: string, password: string) {
+export async function signUpWithEmail(email: string, password: string) {
   await firebase.auth().createUserWithEmailAndPassword(email, password)
 }
 
-export async function facebookLogin() {
+export async function loginWithEmail(email: string, password: string) {
+  await firebase.auth().signInWithEmailAndPassword(email, password)
+}
+
+export async function loginWithFacebook() {
   const provider = new firebase.auth.FacebookAuthProvider()
   const result = await firebase.auth().signInWithPopup(provider)
   if (!result || !result.credential || !result.user) {
@@ -46,4 +50,9 @@ export async function facebookLogin() {
     name: user.displayName || '',
     avatar_url: `${user.photoURL}?type=large` || '',
   })
+}
+
+export async function signOut() {
+  await firebase.auth().signOut()
+  userObservable.next()
 }
