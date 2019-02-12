@@ -1,3 +1,5 @@
+import { isServer } from '@shared/environ'
+
 export enum StorageKey {
   AUTH_TOKEN = 'AUTH_TOKEN',
 }
@@ -8,12 +10,18 @@ interface StorageDriver {
   removeItem: (key: string) => any
 }
 
+const fakeDriver = {
+  getItem: (_key: string) => null,
+  setItem: (_key: string, _value: string) => null,
+  removeItem: (_key: string) => null,
+}
+
 type Key = keyof typeof StorageKey
 
 export class Storage {
   driver: StorageDriver
 
-  constructor(driver: StorageDriver = localStorage) {
+  constructor(driver: StorageDriver = isServer() ? fakeDriver : window.localStorage) {
     this.driver = driver
   }
 
