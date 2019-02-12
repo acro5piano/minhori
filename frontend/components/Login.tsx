@@ -38,8 +38,11 @@ export class Login extends React.Component<Props, State> {
 
   onLoginWithEmail = async () => {
     this.setState({ loading: true })
-    await this.props.onLoginWithEmail(this.state.email, this.state.password)
-    this.setState({ loading: false })
+    try {
+      await this.props.onLoginWithEmail(this.state.email, this.state.password)
+    } finally {
+      this.setState({ loading: false })
+    }
   }
 
   async componentDidMount() {}
@@ -63,7 +66,12 @@ export class Login extends React.Component<Props, State> {
             fullWidth
           />
           <ButtonWrap>
-            <Button color="primary" variant="contained" onClick={this.onLoginWithEmail}>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={this.onLoginWithEmail}
+              disabled={false}
+            >
               {loading ? '...' : 'ログイン'}
             </Button>
           </ButtonWrap>

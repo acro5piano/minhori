@@ -38,8 +38,11 @@ export class SignUp extends React.Component<Props, State> {
 
   onSignUpWithEmail = () => {
     this.setState({ loading: true })
-    this.props.onSignUpWithEmail(this.state.email, this.state.password)
-    this.setState({ loading: false })
+    try {
+      this.props.onSignUpWithEmail(this.state.email, this.state.password)
+    } finally {
+      this.setState({ loading: false })
+    }
   }
 
   async componentDidMount() {}
@@ -63,7 +66,12 @@ export class SignUp extends React.Component<Props, State> {
             fullWidth
           />
           <ButtonWrap>
-            <Button color="primary" variant="contained" onClick={this.onSignUpWithEmail}>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={this.onSignUpWithEmail}
+              disabled={false}
+            >
               {loading ? '...' : '新規登録'}
             </Button>
           </ButtonWrap>
