@@ -50,7 +50,7 @@ export class SignUp extends React.Component<Props, State> {
     return (
       <>
         <Container>
-          <Button onClick={this.props.onSignUpWithFacebook}>Facebook で登録</Button>
+          <Button onClick={this.props.onSignUpWithFacebook}>Facebook で続ける</Button>
           <TextField
             label="メールアドレス"
             value={email}
