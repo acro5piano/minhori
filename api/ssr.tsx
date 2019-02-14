@@ -33,7 +33,7 @@ const template = ({ title, styles, body, meta, muiCss }: Template) => `
     ${meta}
     <style id="jss-server-side">${muiCss}</style>
   </head>
-  <body style="margin:0">
+  <body>
     <div id="root">${body}</div>
   </body>
   ${assets.map(a => `<script src="${a}"></script>`).join('')}
@@ -52,7 +52,6 @@ export function withHelmet<T extends {}>(App: React.ComponentType<T>, props: T) 
           <>
             <CssBaseline />
             <CommonHelmet />
-
             <StaticRouter context={{}}>
               <>
                 <Header />

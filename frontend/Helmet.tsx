@@ -19,7 +19,7 @@ export const CommonHelmet = () => (
           font-size: 13px;
           line-height: 1.67;
           background: #f7f7f7;
-          padding-top: 64px;
+          padding-top: 64px !important;
           color: #555;
         }
 

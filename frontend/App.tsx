@@ -9,16 +9,16 @@ import { Header } from '@frontend/components/Header'
 
 import '@frontend/services/firebase'
 
-function removeServerJss() {
-  const jssStyles = document.getElementById('jss-server-side')
-  if (jssStyles && jssStyles.parentNode) {
-    jssStyles.parentNode.removeChild(jssStyles)
-  }
-}
+// function removeServerJss() {
+//   const jssStyles = document.getElementById('jss-server-side')
+//   if (jssStyles && jssStyles.parentNode) {
+//     jssStyles.parentNode.removeChild(jssStyles)
+//   }
+// }
 
 export class App extends React.Component<{}> {
   componentDidMount() {
-    removeServerJss()
+    // removeServerJss()
   }
 
   render() {
