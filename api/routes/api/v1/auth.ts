@@ -16,18 +16,16 @@ router.post('/register', async (req, res) => {
     return
   }
   const { uid } = await verify(authorization)
+
   const existingUser = await User.query().findOne({ firebase_uid: uid })
   if (existingUser) {
+    const user = await User.query().patchAndFetchById(existingUser.id, { name: req.body.name })
+    res.send(user)
+  } else {
     const user = await User.query().insert({
       name: req.body.name,
       firebase_uid: uid,
     })
-    res.send(user)
-  } else {
-    const user = await User.query()
-      .update({ name: req.body.name })
-      .where({ firebase_uid: uid })
-
     res.send(user)
   }
 })

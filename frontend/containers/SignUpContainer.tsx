@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { SignUp } from '@frontend/components/SignUp'
-import { signUpWithEmail } from '@frontend/services/firebase'
+import { signUpWithEmail, loginWithFacebook } from '@frontend/services/firebase'
 
 export class SignUpContainer extends React.Component<RouteComponentProps> {
   onSignUpWithEmail = async (email: string, password: string) => {
@@ -9,7 +9,17 @@ export class SignUpContainer extends React.Component<RouteComponentProps> {
     this.props.history.push('/')
   }
 
+  onSignUpWithFacebook = async () => {
+    await loginWithFacebook()
+    this.props.history.push('/')
+  }
+
   render() {
-    return <SignUp onSignUpWithEmail={this.onSignUpWithEmail} />
+    return (
+      <SignUp
+        onSignUpWithEmail={this.onSignUpWithEmail}
+        onSignUpWithFacebook={this.onSignUpWithFacebook}
+      />
+    )
   }
 }

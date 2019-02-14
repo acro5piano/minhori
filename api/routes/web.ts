@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { QuestionList } from '@frontend/components/QuestionList'
+import { Login } from '@frontend/components/Login'
 import { Top } from '@frontend/components/Top'
 import { Post } from '@frontend/components/Post'
 import { withHelmet } from '@api/ssr'
@@ -29,6 +30,16 @@ router.get('/questions', (_req, res) => {
 
 router.get('/questions/1', (_req, res) => {
   res.send(withHelmet(Post, { post: questions[0] }))
+})
+
+router.get('/login', (_req, res) => {
+  const dummyLogin = (..._args: any) => {}
+  res.send(
+    withHelmet(Login, {
+      onLoginWithEmail: dummyLogin,
+      onLoginWithFacebook: dummyLogin,
+    }),
+  )
 })
 
 router.get('/*', (_req, res) => {
