@@ -16,13 +16,14 @@ export const CommonHelmet = () => (
     <style type="text/css">{`
         body {
           font-family: 'Roboto', 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
-          font-size: 13px;
-          line-height: 1.67;
           background: #f7f7f7;
           padding-top: 64px !important;
           color: #555;
         }
-
+        body,h1,h2,h3,h4,h5,h6,p,div {
+          font-size: 13px;
+          line-height: 1.67;
+        }
         * {
           box-sizing: border-box;
           -moz-box-sizing: border-box;
@@ -43,7 +44,7 @@ export const CommonHelmet = () => (
 
         textarea {
           line-height: 1.6;
-          font-size: 12px !important;
+          font-size: 16px !important;
         }
     `}</style>
   </Helmet>

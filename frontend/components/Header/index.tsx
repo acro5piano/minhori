@@ -1,8 +1,8 @@
 import * as React from 'react'
+import { LOGIN_PATH, TOP_PATH, SIGNUP_PATH, NEW_QUESTION_PATH } from '@frontend/Routes'
 import { withRouter, RouteComponentProps } from 'react-router'
 import Button from '@material-ui/core/Button'
 import styled from 'styled-components'
-import { LOGIN_PATH, TOP_PATH, SIGNUP_PATH } from '@frontend/Routes'
 import { withUser, WithUser } from '@frontend/store'
 import { User } from '@frontend/entities/User'
 import { signOut } from '@frontend/services/firebase'
@@ -32,6 +32,10 @@ const RegisterWrap = styled.div`
   margin-left: 14px;
 `
 
+const QuestionWrap = styled.div`
+  margin-right: 14px;
+`
+
 const LogoWrapper = styled.div`
   cursor: pointer;
 `
@@ -43,23 +47,36 @@ export const _Header = ({ user, history }: Props) => (
     <LogoWrapper onClick={() => history.push(TOP_PATH)}>
       <img src={asset('/static/logo.png')} width={120} />
     </LogoWrapper>
-    {user ? (
-      <Flex>
-        <span>{(user as User).name}</span>
-        <span onClick={signOut}>ログアウト</span>
-      </Flex>
-    ) : (
-      <Flex>
-        <Button variant="text" onClick={() => history.push(LOGIN_PATH)}>
-          ログイン
-        </Button>
-        <RegisterWrap>
-          <Button variant="contained" color="primary" onClick={() => history.push(SIGNUP_PATH)}>
-            新規登録
+    <Flex>
+      {history.location.pathname !== NEW_QUESTION_PATH && (
+        <QuestionWrap>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => history.push(NEW_QUESTION_PATH)}
+          >
+            質問する
           </Button>
-        </RegisterWrap>
-      </Flex>
-    )}
+        </QuestionWrap>
+      )}
+      {user ? (
+        <>
+          <span>{(user as User).name}</span>
+          <span onClick={signOut}>ログアウト</span>
+        </>
+      ) : (
+        <>
+          <Button variant="text" onClick={() => history.push(LOGIN_PATH)}>
+            ログイン
+          </Button>
+          <RegisterWrap>
+            <Button variant="text" onClick={() => history.push(SIGNUP_PATH)}>
+              新規登録
+            </Button>
+          </RegisterWrap>
+        </>
+      )}
+    </Flex>
   </Container>
 )
 

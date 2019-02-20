@@ -78,8 +78,8 @@ export const Top = ({ questions, tags }: Props) => (
           <Questions>
             {questions.map(question => (
               <QuestionContainer key={question.id}>
-                <div>{question.content}</div>
                 <div>{question.title}</div>
+                <div>{question.content}</div>
               </QuestionContainer>
             ))}
           </Questions>
