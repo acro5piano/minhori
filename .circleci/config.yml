@@ -35,9 +35,28 @@ jobs:
             yarn tsc
             # TODO: Run test in CI
             # yarn test
+  deploy:
+    <<: *defaults
+    steps:
+      - run:
+          name: deploy
+          command: |
+            curl -XPOST -H "Content-Type: application/json" -d '{
+              "build_parameters": {
+                "CIRCLE_JOB": "deploy"
+              }
+            }
+            ' $WEBHOOK_URL
 
 workflows:
   version: 2
   master_jobs:
     jobs:
       - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
