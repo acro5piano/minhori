@@ -5,6 +5,11 @@ export const QuestionApi = {
   get: () => client.GET('/questions/1'),
 }
 
+export const TagApi = {
+  list: () => client.GET('/tags'),
+  get: () => client.GET('/tags/1'),
+}
+
 interface RegisterParams {
   name: string
   avatar_url?: string
