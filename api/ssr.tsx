@@ -36,7 +36,7 @@ const template = ({ title, styles, body, meta, muiCss }: Template) => `
   <body>
     <div id="root">${body}</div>
   </body>
-  ${assets.map(a => `<script src="${a}"></script>`).join('')}
+  ${assets.map(a => `<script src="/build/${a}"></script>`).join('')}
 </html>
 `
 

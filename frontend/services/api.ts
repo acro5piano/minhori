@@ -3,6 +3,7 @@ import { restClient as client } from '@frontend/infra/restClient'
 export const QuestionApi = {
   list: () => client.GET('/questions'),
   get: () => client.GET('/questions/1'),
+  create: (params: any) => client.POST('/questions', params),
 }
 
 export const TagApi = {

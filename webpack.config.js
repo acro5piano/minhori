@@ -52,10 +52,7 @@ const webpackConfig = {
   },
   plugins: [
     new WebpackAssetsManifest(),
-    new HtmlWebpackPlugin({
-      inject: 'body',
-      template: 'index.html',
-    }),
+    new HtmlWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin(),
     new Dotenv(),
   ],
