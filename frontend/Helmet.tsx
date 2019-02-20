@@ -16,14 +16,13 @@ export const CommonHelmet = () => (
     <style type="text/css">{`
         body {
           font-family: 'Roboto', 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
-          font-size: 13px;
-          line-height: 1.67;
           background: #f7f7f7;
           padding-top: 64px !important;
           color: #555;
         }
-
         * {
+          font-size: 13px;
+          line-height: 1.67;
           box-sizing: border-box;
           -moz-box-sizing: border-box;
           -webkit-box-sizing: border-box;
