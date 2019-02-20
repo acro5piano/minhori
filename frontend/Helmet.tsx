@@ -22,9 +22,10 @@ export const CommonHelmet = () => (
         }
         body,h1,h2,h3,h4,h5,h6,p,div {
           font-size: 13px;
-          line-height: 1.67;
+          font-weight: normal;
         }
         * {
+          line-height: 1.67 !important;
           box-sizing: border-box;
           -moz-box-sizing: border-box;
           -webkit-box-sizing: border-box;
@@ -43,7 +44,7 @@ export const CommonHelmet = () => (
         }
 
         textarea {
-          line-height: 1.6;
+          line-height: 1.6 !important;
           font-size: 16px !important;
         }
     `}</style>
