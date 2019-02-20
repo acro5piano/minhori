@@ -6,3 +6,5 @@ export interface Question {
   content: string
   tags: Tag[]
 }
+
+export type CreateQuestionParams = Omit<Question, 'id'>

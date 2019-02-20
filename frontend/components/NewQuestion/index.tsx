@@ -1,89 +1,81 @@
 import * as React from 'react'
-import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+/* import Grid from '@material-ui/core/Grid' */
 import styled from 'styled-components'
 import { Helmet } from 'react-helmet'
-import { asset } from '@shared/asset'
+/* import { asset } from '@shared/asset' */
 import {} from '@frontend/entities/Question'
 import { Tag } from '@frontend/entities/Tag'
-
-const TopImage = styled.div`
-  width: 100%;
-  height: 400px;
-  background-image: url(${asset('/static/top.jpeg')});
-  background-repeat-x: no-repeat;
-  background-position: center;
-`
-
-const TopImageInner = styled.div`
-  max-width: 1024px;
-  margin: auto;
-  padding: 100px 12px 0;
-`
-
-const Advocacy = styled.h1`
-  color: #fff;
-  font-size: 24px;
-`
-
-const SubAdvocacy = styled.h3`
-  color: #fff;
-  font-size: 14px;
-  margin-top: 24px;
-`
-
-const Questions = styled.div`
-  margin-top: 24px;
-`
+import { CreateQuestionParams } from '@frontend/entities/Question'
 
 const ContentContainer = styled.div`
   max-width: 1024px;
-  margin: auto;
-  padding: 12px;
-`
-
-const QuestionContainer = styled.div`
+  margin: 24px auto 0;
   border: solid 1px #eee;
   border-radius: 3px;
   background: #fff;
   padding: 12px;
 `
 
+const TitleWrap = styled.div`
+  max-width: 400px;
+`
+
+const ContentWrap = styled.div`
+  margin-top: 24px;
+`
+
+const ButtonWrap = styled(ContentWrap)`
+  text-align: center;
+  margin-bottom: 24px;
+`
+
 interface Props {
   tags: Tag[]
+  onSubmit: (params: CreateQuestionParams) => Promise<void>
 }
 
-export const NewQuestion = ({ tags }: Props) => (
-  <React.Fragment>
-    <Helmet>
-      <title>
-        ワーキングホリデーの日本最大級口コミ・コミュニティサイト 【みんなのワーキングホリデー】
-      </title>
-    </Helmet>
-    <TopImage>
-      <TopImageInner>
-        <Advocacy>人生は、ワーキングホリデーで広がる。</Advocacy>
-        <SubAdvocacy>
-          ワーキングホリデーの体験は、人生を大きく変える可能性があります。
-          <br />
-          海外で知り合った友人、就業体験、そして現場で学んだ語学力。
-          <br />
-          あなたの一生の宝物になるでしょう。
-        </SubAdvocacy>
-      </TopImageInner>
-    </TopImage>
-    <ContentContainer>
-      <Grid container spacing={16}>
-        <Grid item sm={12} md={4}>
-          <Questions>
-            {tags.map(tag => (
-              <QuestionContainer key={tag.id}>
-                <div>{tag.name}</div>
-                <div>{tag.questionCount}</div>
-              </QuestionContainer>
-            ))}
-          </Questions>
-        </Grid>
-      </Grid>
-    </ContentContainer>
-  </React.Fragment>
-)
+export const NewQuestion = ({ onSubmit }: Props) => {
+  const [title, setTitle] = React.useState('')
+  const [content, setContent] = React.useState('')
+
+  const submit = () => onSubmit({ title, content, tags: [] })
+
+  return (
+    <React.Fragment>
+      <Helmet>
+        <title>
+          質問する - ワーキングホリデーの日本最大級口コミ・コミュニティサイト
+          【みんなのワーキングホリデー】
+        </title>
+      </Helmet>
+      <ContentContainer>
+        <TitleWrap>
+          <TextField
+            fullWidth
+            label="タイトル"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+        </TitleWrap>
+        <ContentWrap>
+          <TextField
+            fullWidth
+            multiline
+            label="質問内容"
+            value={content}
+            onChange={e => setContent(e.target.value)}
+            rows={8}
+            rowsMax={24}
+          />
+        </ContentWrap>
+        <ButtonWrap>
+          <Button variant="contained" color="primary" onClick={submit}>
+            質問する
+          </Button>
+        </ButtonWrap>
+      </ContentContainer>
+    </React.Fragment>
+  )
+}

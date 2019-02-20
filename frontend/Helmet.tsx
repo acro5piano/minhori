@@ -44,7 +44,7 @@ export const CommonHelmet = () => (
 
         textarea {
           line-height: 1.6;
-          font-size: 12px !important;
+          font-size: 16px !important;
         }
     `}</style>
   </Helmet>

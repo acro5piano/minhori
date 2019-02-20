@@ -3,13 +3,14 @@ import { QuestionApi, TagApi } from '@frontend/services/api'
 import { NewQuestion } from '@frontend/components/NewQuestion'
 import { Question } from '@frontend/entities/Question'
 import { Tag } from '@frontend/entities/Tag'
+import { CreateQuestionParams } from '@frontend/entities/Question'
 
 interface State {
   questions: Question[]
   tags: Tag[]
 }
 
-export class TopContainer extends React.Component<{}, State> {
+export class NewQuestionContainer extends React.Component<{}, State> {
   state = {
     questions: [],
     tags: [],
@@ -20,13 +21,13 @@ export class TopContainer extends React.Component<{}, State> {
     this.setState({ tags })
   }
 
-  async submit() {
-    QuestionApi.create({})
+  submit = async (params: CreateQuestionParams) => {
+    await QuestionApi.create(params)
   }
 
   render() {
     const { tags } = this.state
 
-    return <NewQuestion tags={tags} />
+    return <NewQuestion tags={tags} onSubmit={this.submit} />
   }
 }
