@@ -46,7 +46,7 @@ jobs:
                 "CIRCLE_JOB": "deploy"
               }
             }
-            ' "$WEBHOOK_URL"
+            ' "$WEBHOOK_URL" > /dev/null
 
 workflows:
   version: 2
