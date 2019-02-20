@@ -744,6 +744,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/validatorjs@^3.15.0":
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/@types/validatorjs/-/validatorjs-3.15.0.tgz#2d7d00c5da82d53bf367d6674abc66eaee11ed7d"
+  integrity sha512-tqozguXICRdPQVGho1A+lYH4IzU3ggP82OmfFrmb6N6pxmWuXegpw4Th20hy5KtMfuyP+jXB466ABFMO9vma4Q==
+
 "@types/webpack-env@^1.13.7":
   version "1.13.7"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.13.7.tgz#137a4e57aa31ab57b1baf66f5dc3b6bf085e9944"
@@ -8166,6 +8171,11 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+validatorjs@^3.15.1:
+  version "3.15.1"
+  resolved "https://registry.yarnpkg.com/validatorjs/-/validatorjs-3.15.1.tgz#e674b6330c1432913a81128cdb7ff679463d4d2d"
+  integrity sha512-9hJWC4sYaEjf3a6MPKrERzRU69btS/pDy+t5IX8pRFqkI8UI2qj8nR3n2XlVzxRZMQGrf6HrtfDkoRcJavkLlg==
 
 value-equal@^0.4.0:
   version "0.4.0"

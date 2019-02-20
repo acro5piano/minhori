@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import { asset } from '@shared/asset'
 import { Question } from '@frontend/entities/Question'
 import { Tag } from '@frontend/entities/Tag'
+import { QuestionCard } from '@frontend/components/Top/QuestionCard'
 
 const TopImage = styled.div`
   width: 100%;
@@ -46,6 +47,7 @@ const QuestionContainer = styled.div`
   border-radius: 3px;
   background: #fff;
   padding: 12px;
+  margin-top: 12px;
 `
 
 interface Props {
@@ -77,10 +79,7 @@ export const Top = ({ questions, tags }: Props) => (
         <Grid item sm={12} md={8}>
           <Questions>
             {questions.map(question => (
-              <QuestionContainer key={question.id}>
-                <div>{question.title}</div>
-                <div>{question.content}</div>
-              </QuestionContainer>
+              <QuestionCard key={question.id} question={question} />
             ))}
           </Questions>
         </Grid>

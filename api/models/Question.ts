@@ -1,11 +1,13 @@
 import { Model } from 'objection'
 import { ModelBase } from '@api/models/ModelBase'
 import { Tag } from '@api/models/Tag'
+import { User } from '@api/models/User'
 
 export class Question extends ModelBase {
   title!: string
   content!: string
   tags!: Tag[]
+  user!: User
 
   static tableName = 'questions'
 
