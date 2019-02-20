@@ -41,7 +41,7 @@ type Props = WithUser & RouteComponentProps
 export const _Header = ({ user, history }: Props) => (
   <Container>
     <LogoWrapper onClick={() => history.push(TOP_PATH)}>
-      <img src={asset('/logo.png')} width={120} />
+      <img src={asset('/static/logo.png')} width={120} />
     </LogoWrapper>
     {user ? (
       <Flex>

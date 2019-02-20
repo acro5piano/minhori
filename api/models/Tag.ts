@@ -3,6 +3,7 @@ import { ModelBase } from '@api/models/ModelBase'
 
 export class Tag extends ModelBase {
   name!: string
+  questionCount!: number
 
   static tableName = 'tags'
 

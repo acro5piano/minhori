@@ -1,9 +1,11 @@
 import { Model } from 'objection'
 import { ModelBase } from '@api/models/ModelBase'
+import { Tag } from '@api/models/Tag'
 
 export class Question extends ModelBase {
   title!: string
   content!: string
+  tags!: Tag[]
 
   static tableName = 'questions'
 
