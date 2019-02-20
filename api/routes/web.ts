@@ -11,8 +11,7 @@ import { getTagsWithCount } from '@api/repository'
 export const router = Router()
 
 const TopController: Controller = async (_, res) => {
-  const tags = await getTagsWithCount()
-  const questions = await Question.query()
+  const [tags, questions] = await Promise.all([getTagsWithCount(), Question.query()])
   res.send(withHelmet(Top, { questions, tags }))
 }
 

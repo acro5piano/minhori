@@ -28,6 +28,6 @@ export const QuestionCard = ({ question }: Props) => (
   <QuestionContainer key={question.id}>
     <QuestionTitle>{question.title}</QuestionTitle>
     <QuestionContent>{truncate(question.content)}</QuestionContent>
-    <QuestionContent>{question.created_at}</QuestionContent>
+    <QuestionContent>{String(question.created_at)}</QuestionContent>
   </QuestionContainer>
 )
