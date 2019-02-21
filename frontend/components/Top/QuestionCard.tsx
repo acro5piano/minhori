@@ -1,7 +1,10 @@
 import * as React from 'react'
+import { RouteComponentProps, withRouter } from 'react-router'
 import styled from 'styled-components'
-import { Question } from '@frontend/entities/Question'
 import { truncate } from '@shared/truncate'
+import { toRelative } from '@shared/time'
+import { Question } from '@frontend/entities/Question'
+import { QUESTION_PATH, getLink } from '@frontend/Routes'
 
 const QuestionContainer = styled.div`
   border: solid 1px #eee;
@@ -24,10 +27,13 @@ interface Props {
   question: Question
 }
 
-export const QuestionCard = ({ question }: Props) => (
-  <QuestionContainer key={question.id}>
+export const QuestionCard = withRouter(({ question, history }: Props & RouteComponentProps) => (
+  <QuestionContainer
+    key={question.id}
+    onClick={() => history.push(getLink(QUESTION_PATH, question.id))}
+  >
     <QuestionTitle>{question.title}</QuestionTitle>
     <QuestionContent>{truncate(question.content)}</QuestionContent>
-    <QuestionContent>{String(question.created_at)}</QuestionContent>
+    <QuestionContent>{toRelative(question.created_at)}</QuestionContent>
   </QuestionContainer>
-)
+))

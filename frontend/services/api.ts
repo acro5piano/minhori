@@ -3,7 +3,7 @@ import { CreateQuestionParams } from '@frontend/entities/Question'
 
 export const QuestionApi = {
   list: () => client.GET('/questions'),
-  get: () => client.GET('/questions/1'),
+  get: (id: string) => client.GET(`/questions/${id}`),
   create: (params: CreateQuestionParams) => client.POST('/questions', params),
 }
 
