@@ -1,22 +1,27 @@
 import * as React from 'react'
+import { RouteComponentProps } from 'react-router'
+import { Question } from '@frontend/entities/Question'
 import { QuestionApi } from '@frontend/services/api'
-import { QuestionList } from '@frontend/components/QuestionList'
+import { QuestionDetail } from '@frontend/components/QuestionDetail'
 
-export class QuestionContainer extends React.Component<{}> {
+interface State {
+  question: Question | null
+}
+
+export class QuestionContainer extends React.Component<RouteComponentProps<{ id: string }>, State> {
   state = {
-    questions: [],
+    question: null,
   }
 
   async componentDidMount() {
-    const questions = await QuestionApi.list()
-    this.setState({ questions })
+    const { id } = this.props.match.params
+    const question = await QuestionApi.get(id)
+    this.setState({ question })
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <QuestionList questions={this.state.questions} />
-      </React.Fragment>
-    )
+    const { question } = this.state
+
+    return <QuestionDetail question={question} />
   }
 }
