@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { Question } from '@frontend/entities/Question'
 import { truncate } from '@shared/truncate'
+import { toRelative } from '@shared/time'
 
 const QuestionContainer = styled.div`
   border: solid 1px #eee;
@@ -28,6 +29,6 @@ export const QuestionCard = ({ question }: Props) => (
   <QuestionContainer key={question.id}>
     <QuestionTitle>{question.title}</QuestionTitle>
     <QuestionContent>{truncate(question.content)}</QuestionContent>
-    <QuestionContent>{String(question.created_at)}</QuestionContent>
+    <QuestionContent>{toRelative(question.created_at)}</QuestionContent>
   </QuestionContainer>
 )
