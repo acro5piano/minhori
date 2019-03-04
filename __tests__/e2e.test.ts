@@ -73,7 +73,7 @@ describe('question', () => {
       .send({
         title: 'title',
         content: 'content',
-        tags: [{ id: '00000000-0000-0000-0000-000000000001' }],
+        tags: [{ id: 1 }],
       })
       .expect(200)
     expect(res.body.title).toEqual('title')
@@ -86,7 +86,7 @@ describe('question', () => {
     expect(res.body[0].title).toEqual('title')
     expect(res.body[0].tags).toHaveLength(1)
     expect(res.body[0].tags[0]).toMatchObject({
-      id: '00000000-0000-0000-0000-000000000001',
+      id: 1,
       name: 'オーストラリア',
     })
   })
