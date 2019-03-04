@@ -1,6 +1,8 @@
 exports.seed = async function(knex, Promise) {
+  await knex.raw("SET session_replication_role = 'replica'")
   await knex('tags').del()
   await knex('tags').insert(tags)
+  await knex.raw("SET session_replication_role = 'origin'")
 }
 
 const tags = [
