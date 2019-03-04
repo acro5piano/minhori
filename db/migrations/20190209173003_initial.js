@@ -1,9 +1,6 @@
 exports.up = async function(knex, Promise) {
   await knex.schema.createTable('users', function(table) {
-    table
-      .uuid('id')
-      .notNullable()
-      .primary()
+    table.increments('id')
     table.string('name')
     table.string('email').notNullable()
     table.string('avatar_url')
@@ -11,11 +8,11 @@ exports.up = async function(knex, Promise) {
   })
 
   await knex.schema.createTable('questions', function(table) {
+    table.increments('id')
     table
-      .uuid('id')
+      .integer('user_id')
+      .unsigned()
       .notNullable()
-      .primary()
-    table.uuid('user_id').notNullable()
     table.foreign('user_id').references('users.id')
     table.string('title').notNullable()
     table.string('content')
@@ -23,13 +20,16 @@ exports.up = async function(knex, Promise) {
   })
 
   await knex.schema.createTable('answers', function(table) {
+    table.increments('id')
     table
-      .uuid('id')
+      .integer('user_id')
+      .unsigned()
       .notNullable()
-      .primary()
-    table.uuid('user_id').notNullable()
     table.foreign('user_id').references('users.id')
-    table.uuid('question_id').notNullable()
+    table
+      .integer('question_id')
+      .unsigned()
+      .notNullable()
     table.foreign('question_id').references('questions.id')
     table.string('title').notNullable()
     table.string('content')

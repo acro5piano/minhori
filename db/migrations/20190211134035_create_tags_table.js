@@ -1,16 +1,19 @@
 exports.up = async function(knex, Promise) {
   await knex.schema.createTable('tags', function(table) {
-    table
-      .uuid('id')
-      .notNullable()
-      .primary()
+    table.increments('id')
     table.string('name').notNullable()
   })
 
   await knex.schema.createTable('questions_tags', function(table) {
-    table.uuid('question_id').notNullable()
+    table
+      .integer('question_id')
+      .unsigned()
+      .notNullable()
     table.foreign('question_id').references('questions.id')
-    table.uuid('tag_id').notNullable()
+    table
+      .integer('tag_id')
+      .unsigned()
+      .notNullable()
     table.foreign('tag_id').references('tags.id')
   })
 }
