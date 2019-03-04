@@ -16,12 +16,6 @@ export function translate(a: string) {
     .replace(/(?:in )?(\d+) years ago/, '$1年前')
 }
 
-console.log(
-  DateTime.local()
-    .plus({ days: 1 })
-    .toRelative(),
-)
-
 export function toRelative(isoString: string) {
   const date = DateTime.fromISO(String(isoString)).toRelative()
   if (!date) {

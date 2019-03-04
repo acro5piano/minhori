@@ -1,6 +1,5 @@
 import { Model } from 'objection'
 import * as Knex from 'knex'
-import * as uuid from 'uuid'
 // @ts-ignore
 import * as KnexConfig from '@root/knexfile'
 
@@ -17,7 +16,6 @@ export abstract class ModelBase extends Model {
   updated_at!: string
 
   $beforeInsert() {
-    this.id = uuid()
     this.created_at = new Date().toISOString()
     this.updated_at = new Date().toISOString()
   }
