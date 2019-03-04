@@ -14,6 +14,7 @@ router.get('/', async (_req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
+  console.log('hoge')
   const question = await Question.query()
     .findById(req.params.id)
     .eager('[tags, answers]')

@@ -8,6 +8,9 @@ import { App } from './App'
 // Create a new class name generator.
 const generateClassName = createGenerateClassName()
 
+const el = document.getElementById('root')
+console.log(el)
+
 ReactDOM.hydrate(
   <JssProvider generateClassName={generateClassName}>
     <App />

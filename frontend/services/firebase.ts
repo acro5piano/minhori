@@ -19,11 +19,9 @@ firebase.auth().onAuthStateChanged(async user => {
   if (user) {
     const token = await user.getIdToken()
     storage.set(StorageKey.AUTH_TOKEN, token)
-    userObservable.next({
-      id: user.uid,
-      name: user.displayName || '',
-    })
-    console.log(user)
+    const me = await AuthApi.me()
+    userObservable.next(me)
+    console.log(me)
   } else {
     console.log('sign out')
   }

@@ -22,9 +22,9 @@ export const getLink = (pathname: string, ...ids: any[]): string =>
 export const Routes = () => (
   <Switch>
     <Route exact path={TOP_PATH} component={TopContainer} />
+    <Route exact path={NEW_QUESTION_PATH} component={NewQuestionContainer} />
     <Route exact path={QUESTIONS_PATH} component={QuestionListContainer} />
     <Route exact path={QUESTION_PATH} component={QuestionContainer} />
-    <Route exact path={NEW_QUESTION_PATH} component={NewQuestionContainer} />
     <Route exact path={LOGIN_PATH} component={LoginContainer} />
     <Route exact path={SIGNUP_PATH} component={SignUpContainer} />
     <Route component={() => <div>404 not found</div>} />
